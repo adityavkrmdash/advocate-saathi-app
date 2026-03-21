@@ -1,0 +1,67 @@
+/* ================================================
+   ADVOCATE SAATHI — DESIGN TOKENS
+   frontend/css/variables.css
+   ================================================ */
+
+:root {
+  /* ── Colour Palette ── */
+  --navy-deep:    #050d1a;
+  --navy-mid:     #0a1628;
+  --navy-card:    #0f1f35;
+  --navy-border:  #1a2d45;
+
+  --gold:         #c9a84c;
+  --gold-light:   #e8c97a;
+  --gold-dim:     #8a6f34;
+  --gold-glow:    rgba(201, 168, 76, 0.15);
+  --gold-glow-sm: rgba(201, 168, 76, 0.06);
+
+  --text-primary:   #f0e8d8;
+  --text-secondary: #8fa3bc;
+  --text-muted:     #4a6280;
+
+  --user-bubble: #1a3a5c;
+  --ai-bubble:   #0f1f35;
+
+  --success: #2dd4a0;
+  --danger:  #e05c5c;
+  --warning: #f59e0b;
+  --info:    #3a7bd5;
+
+  /* ── Category Accent Colors ── */
+  --cat-labour:   #f59e0b;
+  --cat-criminal: #ef4444;
+  --cat-consumer: #10b981;
+  --cat-civil:    #6366f1;
+  --cat-family:   #ec4899;
+  --cat-property: #8b5cf6;
+  --cat-cyber:    #06b6d4;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* ── Spacing / Radius ── */
+  --radius-xs:   6px;
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-gold: 0 0 30px rgba(201, 168, 76, 0.12);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-btn:  0 8px 24px rgba(201, 168, 76, 0.3);
+
+  /* ── Transitions ── */
+  --transition-fast:   0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow:   0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Z-Index ── */
+  --z-screen:  1;
+  --z-overlay: 100;
+  --z-toast:   200;
+}

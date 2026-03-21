@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advocate Saathi — Lawyer Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── SIDEBAR ─────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">⚖️</div>
+        <div class="brand-text">
+          <div class="brand-name">Advocate Saathi</div>
+          <div class="brand-role">Lawyer Portal</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Main</div>
+        <a href="#" class="nav-item active" onclick="App.navigate('dashboard', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item" onclick="App.navigate('workspace', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          Case Workspace
+          <span class="nav-badge">12</span>
+        </a>
+        <a href="#" class="nav-item" onclick="App.navigate('clients', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Clients
+        </a>
+        <a href="#" class="nav-item" onclick="App.navigate('payments', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Payments
+          <span class="nav-badge pending">3</span>
+        </a>
+        <a href="#" class="nav-item" onclick="App.navigate('reviews', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Reviews
+        </a>
+
+        <div class="nav-section-label" style="margin-top:16px;">Account</div>
+        <a href="#" class="nav-item" onclick="App.navigate('settings', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0010 2.05M4.93 4.93A10 10 0 002.05 10M4.93 19.07A10 10 0 0010 21.95M19.07 19.07A10 10 0 0021.95 14"/></svg>
+          Settings
+        </a>
+        <a href="#" class="nav-item" onclick="App.logout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Sign Out
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="sb-avatar">RS</div>
+        <div class="user-info">
+          <div class="user-name" id="sb-name">Adv. Rajesh Sharma</div>
+          <div class="user-status"><span class="online-dot"></span>Online</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── MAIN CONTENT ───────────────────────── -->
+    <main class="main-content">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" onclick="App.toggleSidebar()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title" id="page-title">Dashboard</div>
+        </div>
+        <div class="topbar-right">
+          <div class="search-bar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search cases, clients…"/>
+          </div>
+          <button class="notif-btn" onclick="App.toggleNotifications()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="notif-badge">5</span>
+          </button>
+          <div class="topbar-avatar" id="tb-avatar">RS</div>
+        </div>
+      </header>
+
+      <!-- Notifications Dropdown -->
+      <div class="notif-dropdown" id="notif-dropdown" style="display:none;">
+        <div class="notif-header"><span>Notifications</span><button onclick="App.toggleNotifications()">×</button></div>
+        <div class="notif-list">
+          <div class="notif-item unread"><div class="ni-icon">🚨</div><div class="ni-body"><div class="ni-title">New urgent case assigned</div><div class="ni-time">2 min ago</div></div></div>
+          <div class="notif-item unread"><div class="ni-icon">💬</div><div class="ni-body"><div class="ni-title">Priya sent a message</div><div class="ni-time">15 min ago</div></div></div>
+          <div class="notif-item unread"><div class="ni-icon">📅</div><div class="ni-body"><div class="ni-title">Court hearing tomorrow at 10AM</div><div class="ni-time">1 hr ago</div></div></div>
+          <div class="notif-item"><div class="ni-icon">💰</div><div class="ni-body"><div class="ni-title">Payment received ₹5,000</div><div class="ni-time">3 hrs ago</div></div></div>
+          <div class="notif-item"><div class="ni-icon">⭐</div><div class="ni-body"><div class="ni-title">New 5-star review from Amit K.</div><div class="ni-time">Yesterday</div></div></div>
+        </div>
+      </div>
+
+      <!-- ── PAGES ─────────────────────────────── -->
+
+      <!-- DASHBOARD PAGE -->
+      <div class="page active" id="page-dashboard">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-heading">Good morning, <span id="lawyer-name">Rajesh</span> 👋</h1>
+            <p class="page-subheading">Here's what's happening with your cases today.</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-secondary" onclick="App.openNewCase()">+ New Case</button>
+            <button class="btn-primary-sm">Generate Report</button>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div>
+            <div class="stat-body">
+              <div class="stat-value">47</div>
+              <div class="stat-label">Total Cases</div>
+              <div class="stat-change up">↑ 8% this month</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="stat-body">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Active Cases</div>
+              <div class="stat-change up">↑ 3 new this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="stat-body">
+              <div class="stat-value">8</div>
+              <div class="stat-label">Pending Cases</div>
+              <div class="stat-change down">↓ 2 resolved</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <div class="stat-body">
+              <div class="stat-value">₹1.24L</div>
+              <div class="stat-label">Earnings (Mar)</div>
+              <div class="stat-change up">↑ 22% vs Feb</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="dashboard-middle">
+
+          <!-- AI Priority Cases -->
+          <div class="panel priority-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span class="ai-badge">AI</span>
+                Priority Cases
+              </div>
+              <button class="view-all-btn" onclick="App.navigate('workspace', null)">View All →</button>
+            </div>
+
+            <div class="priority-case" onclick="App.openCase('C001')">
+              <div class="pc-left">
+                <div class="urgency-badge high">HIGH</div>
+                <div class="pc-info">
+                  <div class="pc-title">Unpaid Salary — TechCorp Pvt Ltd</div>
+                  <div class="pc-meta">Priya Sharma · Labour Law</div>
+                  <div class="pc-desc">Employee claims 4 months salary pending. Employer has not responded to prior notices.</div>
+                  <div class="pc-tags">
+                    <span class="tag red">FIR Required</span>
+                    <span class="tag blue">AI Matched</span>
+                    <span class="tag">Deadline: 3 days</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pc-arrow">→</div>
+            </div>
+
+            <div class="priority-case" onclick="App.openCase('C002')">
+              <div class="pc-left">
+                <div class="urgency-badge high">HIGH</div>
+                <div class="pc-info">
+                  <div class="pc-title">UPI Fraud — ₹82,000 Stolen</div>
+                  <div class="pc-meta">Amit Kumar · Cyber Crime</div>
+                  <div class="pc-desc">Client lost ₹82,000 via phishing link. Bank has denied refund claim. IT Act 66C applicable.</div>
+                  <div class="pc-tags">
+                    <span class="tag red">FIR Required</span>
+                    <span class="tag orange">Evidence Available</span>
+                    <span class="tag">Deadline: 5 days</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pc-arrow">→</div>
+            </div>
+
+            <div class="priority-case" onclick="App.openCase('C003')">
+              <div class="pc-left">
+                <div class="urgency-badge medium">MED</div>
+                <div class="pc-info">
+                  <div class="pc-title">Security Deposit — ₹95,000</div>
+                  <div class="pc-meta">Meera Nair · Property Law</div>
+                  <div class="pc-desc">Landlord refusing to return deposit after 60 days of vacating. Written notice sent.</div>
+                  <div class="pc-tags">
+                    <span class="tag yellow">Notice Sent</span>
+                    <span class="tag blue">AI Matched</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pc-arrow">→</div>
+            </div>
+
+            <div class="priority-case" onclick="App.openCase('C004')">
+              <div class="pc-left">
+                <div class="urgency-badge low">LOW</div>
+                <div class="pc-info">
+                  <div class="pc-title">Consumer Complaint — Defective Laptop</div>
+                  <div class="pc-meta">Rahul Singh · Consumer Rights</div>
+                  <div class="pc-desc">E-commerce seller refusing return within return window. CPA 2019 applicable.</div>
+                  <div class="pc-tags">
+                    <span class="tag green">Forum Filing</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pc-arrow">→</div>
+            </div>
+          </div>
+
+          <!-- Right Panel: Tasks & Follow-ups -->
+          <div class="right-panels">
+            <div class="panel tasks-panel">
+              <div class="panel-header">
+                <div class="panel-title">📋 Tasks & Deadlines</div>
+                <button class="view-all-btn">+ Add</button>
+              </div>
+              <div class="task-list">
+                <div class="task-item overdue">
+                  <div class="task-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  </div>
+                  <div class="task-body">
+                    <div class="task-title">File FIR for Priya Sharma case</div>
+                    <div class="task-due overdue-text">Overdue · 2 days ago</div>
+                  </div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  </div>
+                  <div class="task-body">
+                    <div class="task-title">Reply to Amit Kumar's message</div>
+                    <div class="task-due">Today, 5:00 PM</div>
+                  </div>
+                </div>
+                <div class="task-item done">
+                  <div class="task-check done-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                  </div>
+                  <div class="task-body">
+                    <div class="task-title">Send notice to TechCorp</div>
+                    <div class="task-due">Done · Mar 18</div>
+                  </div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  </div>
+                  <div class="task-body">
+                    <div class="task-title">Prepare consumer forum documents</div>
+                    <div class="task-due">Tomorrow, 10:00 AM</div>
+                  </div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  </div>
+                  <div class="task-body">
+                    <div class="task-title">Review Meera's rental agreement</div>
+                    <div class="task-due">Mar 22, 2:00 PM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel followups-panel">
+              <div class="panel-header">
+                <div class="panel-title">📅 Upcoming Follow-ups</div>
+              </div>
+              <div class="followup-list">
+                <div class="followup-item">
+                  <div class="fu-date"><div class="fu-day">20</div><div class="fu-month">MAR</div></div>
+                  <div class="fu-body">
+                    <div class="fu-title">Call with Priya Sharma</div>
+                    <div class="fu-time">10:30 AM · Video Call</div>
+                  </div>
+                  <div class="fu-badge urgent">Today</div>
+                </div>
+                <div class="followup-item">
+                  <div class="fu-date"><div class="fu-day">21</div><div class="fu-month">MAR</div></div>
+                  <div class="fu-body">
+                    <div class="fu-title">District Court Hearing</div>
+                    <div class="fu-time">11:00 AM · Courtroom 4</div>
+                  </div>
+                  <div class="fu-badge">Tomorrow</div>
+                </div>
+                <div class="followup-item">
+                  <div class="fu-date"><div class="fu-day">23</div><div class="fu-month">MAR</div></div>
+                  <div class="fu-body">
+                    <div class="fu-title">Consumer Forum Filing</div>
+                    <div class="fu-time">2:00 PM · Online</div>
+                  </div>
+                  <div class="fu-badge">In 3 days</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="dashboard-bottom">
+          <!-- Recent Activity -->
+          <div class="panel activity-panel">
+            <div class="panel-header">
+              <div class="panel-title">⚡ Recent Activity</div>
+            </div>
+            <div class="activity-feed">
+              <div class="activity-item"><div class="act-dot green"></div><div class="act-body"><strong>Priya Sharma</strong> submitted new evidence documents</div><div class="act-time">Just now</div></div>
+              <div class="activity-item"><div class="act-dot blue"></div><div class="act-body"><strong>Amit Kumar</strong> case marked as Active</div><div class="act-time">1 hr ago</div></div>
+              <div class="activity-item"><div class="act-dot gold"></div><div class="act-body">Payment of <strong>₹8,000</strong> received from Rahul Singh</div><div class="act-time">3 hrs ago</div></div>
+              <div class="activity-item"><div class="act-dot red"></div><div class="act-body">FIR deadline approaching for <strong>C001</strong> — 3 days remaining</div><div class="act-time">5 hrs ago</div></div>
+              <div class="activity-item"><div class="act-dot green"></div><div class="act-body"><strong>Meera Nair</strong> left a 5-star review</div><div class="act-time">Yesterday</div></div>
+              <div class="activity-item"><div class="act-dot blue"></div><div class="act-body">Legal notice sent to landlord in <strong>Meera Nair</strong> case</div><div class="act-time">Mar 18</div></div>
+            </div>
+          </div>
+
+          <!-- Messages Preview -->
+          <div class="panel messages-panel">
+            <div class="panel-header">
+              <div class="panel-title">💬 Latest Messages</div>
+              <button class="view-all-btn" onclick="App.navigate('workspace', null)">View All →</button>
+            </div>
+            <div class="msg-preview-list">
+              <div class="msg-preview unread-msg" onclick="App.openCase('C001')">
+                <div class="mp-avatar" style="background:#ef4444;">PS</div>
+                <div class="mp-body">
+                  <div class="mp-name">Priya Sharma</div>
+                  <div class="mp-text">Sir, I have uploaded the salary slips. Please review when possible.</div>
+                </div>
+                <div class="mp-meta"><div class="mp-time">2m</div><div class="mp-dot"></div></div>
+              </div>
+              <div class="msg-preview unread-msg" onclick="App.openCase('C002')">
+                <div class="mp-avatar" style="background:#8b5cf6;">AK</div>
+                <div class="mp-body">
+                  <div class="mp-name">Amit Kumar</div>
+                  <div class="mp-text">What is the status of my bank complaint?</div>
+                </div>
+                <div class="mp-meta"><div class="mp-time">15m</div><div class="mp-dot"></div></div>
+              </div>
+              <div class="msg-preview" onclick="App.openCase('C003')">
+                <div class="mp-avatar" style="background:#06b6d4;">MN</div>
+                <div class="mp-body">
+                  <div class="mp-name">Meera Nair</div>
+                  <div class="mp-text">Thank you for sending the notice. Will wait for response.</div>
+                </div>
+                <div class="mp-meta"><div class="mp-time">2h</div></div>
+              </div>
+              <div class="msg-preview" onclick="App.openCase('C004')">
+                <div class="mp-avatar" style="background:#10b981;">RS</div>
+                <div class="mp-body">
+                  <div class="mp-name">Rahul Singh</div>
+                  <div class="mp-text">Okay noted. I'll collect the documents tomorrow.</div>
+                </div>
+                <div class="mp-meta"><div class="mp-time">5h</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CASE WORKSPACE PAGE ─────────────────── -->
+      <div class="page" id="page-workspace">
+        <div class="workspace-layout">
+
+          <!-- LEFT: Case List -->
+          <div class="ws-left">
+            <div class="ws-header">
+              <div class="ws-title">Cases</div>
+              <div style="display:flex;gap:6px;">
+                <button class="view-toggle active" id="btn-list" onclick="App.setView('list')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </button>
+                <button class="view-toggle" id="btn-kanban" onclick="App.setView('kanban')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+              <select class="filter-select" onchange="App.filterCases(this)">
+                <option value="">All Types</option>
+                <option value="labour">Labour</option>
+                <option value="cyber">Cyber Crime</option>
+                <option value="consumer">Consumer</option>
+                <option value="property">Property</option>
+                <option value="family">Family</option>
+                <option value="criminal">Criminal</option>
+              </select>
+              <select class="filter-select">
+                <option value="">All Urgency</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+
+            <!-- Case List -->
+            <div class="case-list" id="case-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- CENTER: Case Details -->
+          <div class="ws-center" id="ws-center">
+            <div class="ws-empty" id="ws-empty">
+              <div style="font-size:48px;margin-bottom:16px;">📂</div>
+              <div style="font-size:16px;font-weight:600;color:#94a3b8;margin-bottom:8px;">Select a case</div>
+              <div style="font-size:13px;color:#64748b;">Click any case on the left to view details</div>
+            </div>
+            <div id="ws-case-detail" style="display:none;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- RIGHT: Chat/Docs Tabs -->
+          <div class="ws-right">
+            <div class="ws-tabs">
+              <button class="ws-tab active" id="tab-chat" onclick="App.switchWsTab('chat')">💬 Chat</button>
+              <button class="ws-tab" id="tab-docs" onclick="App.switchWsTab('docs')">📁 Documents</button>
+            </div>
+
+            <!-- Chat -->
+            <div id="ws-chat" class="ws-chat">
+              <div class="chat-messages-ws" id="chat-messages-ws">
+                <!-- Populated by JS -->
+              </div>
+              <div class="chat-input-ws">
+                <textarea id="ws-chat-input" placeholder="Type a message…" rows="1" oninput="autoResize(this)"></textarea>
+                <button onclick="App.sendMessage()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Documents -->
+            <div id="ws-docs" class="ws-docs" style="display:none;">
+              <div class="docs-upload" onclick="document.getElementById('doc-file').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <div>Click to upload document</div>
+                <div style="font-size:11px;color:#64748b;">PDF, DOCX, JPG — Max 10MB</div>
+                <input type="file" id="doc-file" style="display:none;" onchange="App.uploadDoc(this)"/>
+              </div>
+              <div class="docs-list" id="docs-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAYMENTS PAGE ───────────────────────── -->
+      <div class="page" id="page-payments">
+        <div class="page-header"><h1 class="page-heading">Payments</h1></div>
+
+        <div class="payments-grid">
+          <div class="panel earn-summary">
+            <div class="panel-title" style="margin-bottom:20px;">💰 Earnings Summary</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+              <div class="earn-card"><div class="earn-value">₹1,24,500</div><div class="earn-label">This Month</div></div>
+              <div class="earn-card"><div class="earn-value">₹8,32,000</div><div class="earn-label">This Year</div></div>
+              <div class="earn-card"><div class="earn-value">₹23,000</div><div class="earn-label">Pending</div></div>
+              <div class="earn-card"><div class="earn-value">₹4,200</div><div class="earn-label">Avg/Case</div></div>
+            </div>
+            <div class="pending-payout">
+              <div class="pp-header">Pending Payouts</div>
+              <div class="pp-item"><span>Priya Sharma — Labour Case</span><span class="pp-amt">₹12,000</span></div>
+              <div class="pp-item"><span>Amit Kumar — Cyber Case</span><span class="pp-amt">₹8,500</span></div>
+              <div class="pp-item"><span>Meera Nair — Property Case</span><span class="pp-amt">₹2,500</span></div>
+              <button class="btn-primary-sm" style="margin-top:12px;width:100%;">Request Payout</button>
+            </div>
+          </div>
+
+          <div class="panel txn-panel">
+            <div class="panel-header"><div class="panel-title">📋 Transaction History</div></div>
+            <table class="txn-table">
+              <thead><tr><th>Date</th><th>Client</th><th>Case</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Mar 19</td><td>Rahul Singh</td><td>Consumer Complaint</td><td>₹8,000</td><td><span class="badge-green">Paid</span></td></tr>
+                <tr><td>Mar 17</td><td>Deepa Verma</td><td>Cheque Bounce</td><td>₹15,000</td><td><span class="badge-green">Paid</span></td></tr>
+                <tr><td>Mar 15</td><td>Suresh Patel</td><td>Family Dispute</td><td>₹6,500</td><td><span class="badge-green">Paid</span></td></tr>
+                <tr><td>Mar 12</td><td>Kavita Reddy</td><td>Property Dispute</td><td>₹20,000</td><td><span class="badge-green">Paid</span></td></tr>
+                <tr><td>Mar 10</td><td>Vijay Kumar</td><td>Labour Law</td><td>₹5,500</td><td><span class="badge-yellow">Processing</span></td></tr>
+                <tr><td>Mar 8</td><td>Anita Shah</td><td>Cyber Crime</td><td>₹12,000</td><td><span class="badge-green">Paid</span></td></tr>
+                <tr><td>Mar 5</td><td>Mohan Das</td><td>Criminal</td><td>₹25,000</td><td><span class="badge-yellow">Processing</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── REVIEWS PAGE ────────────────────────── -->
+      <div class="page" id="page-reviews">
+        <div class="page-header"><h1 class="page-heading">Client Reviews</h1></div>
+
+        <div class="reviews-grid">
+          <div class="panel rating-summary">
+            <div class="panel-title" style="margin-bottom:20px;">⭐ Overall Rating</div>
+            <div class="big-rating">4.8</div>
+            <div class="star-row">⭐⭐⭐⭐⭐</div>
+            <div style="color:#94a3b8;font-size:13px;margin-top:8px;">Based on 34 reviews</div>
+            <div class="rating-bars">
+              <div class="rb-row"><span>5★</span><div class="rb-track"><div class="rb-fill" style="width:78%;background:#10b981;"></div></div><span>26</span></div>
+              <div class="rb-row"><span>4★</span><div class="rb-track"><div class="rb-fill" style="width:15%;background:#f59e0b;"></div></div><span>5</span></div>
+              <div class="rb-row"><span>3★</span><div class="rb-track"><div class="rb-fill" style="width:6%;background:#f59e0b;"></div></div><span>2</span></div>
+              <div class="rb-row"><span>2★</span><div class="rb-track"><div class="rb-fill" style="width:3%;background:#ef4444;"></div></div><span>1</span></div>
+              <div class="rb-row"><span>1★</span><div class="rb-track"><div class="rb-fill" style="width:0%;"></div></div><span>0</span></div>
+            </div>
+          </div>
+
+          <div class="reviews-list">
+            <div class="review-card">
+              <div class="rv-header"><div class="rv-avatar" style="background:#ef4444;">PS</div><div><div class="rv-name">Priya Sharma</div><div class="rv-case">Labour Law Case · Mar 2026</div></div><div class="rv-stars">⭐⭐⭐⭐⭐</div></div>
+              <div class="rv-text">"Rajesh Sir handled my salary case with complete professionalism. Got my 4 months salary recovered in just 45 days. Highly recommend!"</div>
+            </div>
+            <div class="review-card">
+              <div class="rv-header"><div class="rv-avatar" style="background:#8b5cf6;">AK</div><div><div class="rv-name">Amit Kumar</div><div class="rv-case">Cyber Crime Case · Feb 2026</div></div><div class="rv-stars">⭐⭐⭐⭐⭐</div></div>
+              <div class="rv-text">"Lost ₹82,000 in UPI fraud. Rajesh Sir filed the FIR and worked with the cyber cell. Very responsive and explained every step clearly."</div>
+            </div>
+            <div class="review-card">
+              <div class="rv-header"><div class="rv-avatar" style="background:#06b6d4;">MN</div><div><div class="rv-name">Meera Nair</div><div class="rv-case">Property Law Case · Jan 2026</div></div><div class="rv-stars">⭐⭐⭐⭐⭐</div></div>
+              <div class="rv-text">"Excellent work on my security deposit case. Notice was drafted professionally and landlord responded within 2 weeks. Deposit returned in full."</div>
+            </div>
+            <div class="review-card">
+              <div class="rv-header"><div class="rv-avatar" style="background:#10b981;">RS</div><div><div class="rv-name">Rahul Singh</div><div class="rv-case">Consumer Rights Case · Jan 2026</div></div><div class="rv-stars">⭐⭐⭐⭐☆</div></div>
+              <div class="rv-text">"Good service. Consumer forum case handled well. Took a bit longer than expected but the outcome was positive. Will use again."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CLIENTS PAGE ────────────────────────── -->
+      <div class="page" id="page-clients">
+        <div class="page-header"><h1 class="page-heading">Clients</h1></div>
+        <div class="panel">
+          <table class="txn-table">
+            <thead><tr><th>Name</th><th>Cases</th><th>Type</th><th>Status</th><th>Joined</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="mp-avatar" style="width:32px;height:32px;font-size:11px;background:#ef4444;">PS</div>Priya Sharma</div></td><td>2</td><td>Labour</td><td><span class="badge-yellow">Active</span></td><td>Mar 2026</td><td><button class="btn-xs" onclick="App.openCase('C001')">View</button></td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="mp-avatar" style="width:32px;height:32px;font-size:11px;background:#8b5cf6;">AK</div>Amit Kumar</div></td><td>1</td><td>Cyber</td><td><span class="badge-yellow">Active</span></td><td>Feb 2026</td><td><button class="btn-xs" onclick="App.openCase('C002')">View</button></td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="mp-avatar" style="width:32px;height:32px;font-size:11px;background:#06b6d4;">MN</div>Meera Nair</div></td><td>1</td><td>Property</td><td><span class="badge-yellow">Active</span></td><td>Jan 2026</td><td><button class="btn-xs" onclick="App.openCase('C003')">View</button></td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="mp-avatar" style="width:32px;height:32px;font-size:11px;background:#10b981;">RS</div>Rahul Singh</div></td><td>1</td><td>Consumer</td><td><span class="badge-green">Resolved</span></td><td>Jan 2026</td><td><button class="btn-xs" onclick="App.openCase('C004')">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS PAGE ──────────────────────── -->
+      <div class="page" id="page-settings">
+        <div class="page-header"><h1 class="page-heading">Settings</h1></div>
+        <div class="panel" style="max-width:600px;">
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div class="setting-row"><div><div class="setting-title">Display Name</div><div class="setting-sub">Shown to clients</div></div><input class="form-input-sm" value="Adv. Rajesh Sharma"/></div>
+            <div class="setting-row"><div><div class="setting-title">Email</div><div class="setting-sub">Login email</div></div><input class="form-input-sm" value="rajesh@advocatesaathi.com"/></div>
+            <div class="setting-row"><div><div class="setting-title">Consultation Fee</div><div class="setting-sub">Per consultation</div></div><input class="form-input-sm" value="₹500"/></div>
+            <div class="setting-row"><div><div class="setting-title">Notifications</div><div class="setting-sub">Email + push</div></div><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+            <div class="setting-row"><div><div class="setting-title">Available for Cases</div><div class="setting-sub">Accept new assignments</div></div><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+            <button class="btn-primary-sm" style="align-self:flex-start;">Save Changes</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

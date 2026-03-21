@@ -1,0 +1,72 @@
+/* ================================================
+   ADVOCATE SAATHI — BASE & RESET
+   frontend/css/base.css
+   ================================================ */
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: #020810;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Phone Shell ── */
+#phone {
+  width: min(390px, 100vw);
+  height: min(844px, 100dvh);
+  background: var(--navy-mid);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 420px) {
+  #phone {
+    border-radius: 40px;
+    height: 844px;
+    box-shadow:
+      0 40px 120px rgba(0,0,0,0.8),
+      0 0 0 1px var(--navy-border),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+}
+
+#screen-root { position: absolute; inset: 0; }
+
+/* ── Screen Base ── */
+.screen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transform: translateX(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+.screen.active    { opacity: 1; pointer-events: all; transform: translateX(0); z-index: var(--z-screen); }
+.screen.slide-out { opacity: 0; transform: translateX(-30px); }
+
+/* ── Scroll Area ── */
+.scroll-area { overflow-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.scroll-area::-webkit-scrollbar { display: none; }
+
+/* ── Utility Helpers ── */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-muted);
+  padding: 0 24px; margin-bottom: 14px;
+}
+.screen-header { padding: 16px 24px 20px; flex-shrink: 0; }
+.screen-header-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.screen-header-sub   { font-size: 13px; color: var(--text-muted); }
